@@ -1,0 +1,36 @@
+<body>
+  <div class="container">
+  <header>
+    {{> loginButtons}}
+    {{#if currentUser}}
+      <form class="new-classroom">
+        <input type="text" name="classroomName" placeholder="Type to add a new classroom" />
+        <br>
+        <input type="text" name="classLocation" placeholder="What's the location of this class?" />
+        <br>
+        <input type="text" name="noOfStudents" placeholder="How many students study in this class?" />
+        <button type="submit" class="btn btn-lg btn-primary btn-block">Create Class</button>
+      </form>
+    {{/if}}
+  </header>
+    <ul>
+      {{#if currentUser}}
+      <p> <strong>  Welcome back! Here are your classrooms: </strong></p>
+        {{#each classrooms}}
+          {{> classroom}}
+        {{/each}}
+      {{else}}
+      <p> <strong> Please sign in above! </strong></p>
+      {{/if}}
+    </ul>
+  </div>
+</body>
+
+<template name="classroom">
+  <li><b>{{name}} -- {{email}}</b></li>
+  <p>
+    <li>Location: {{location}}</li>
+    <li>No. of Students: {{noOfStudents}}</li>
+  </p>
+  <br>
+</template>
