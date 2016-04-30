@@ -3,6 +3,7 @@
   <header>
     {{> loginButtons}}
     {{#if currentUser}}
+      <h3> Create a new classroom: </h3>
       <form class="new-classroom">
         <input type="text" name="classroomName" placeholder="Type to add a new classroom" />
         <br>
@@ -11,26 +12,41 @@
         <input type="text" name="noOfStudents" placeholder="How many students study in this class?" />
         <button type="submit" class="btn btn-lg btn-primary btn-block">Create Class</button>
       </form>
+      <br>
+      <h3> Add a student to a classroom: </h3>
+      <form class="new-student">
+        <input type="text" name="whichClass" placeholder="Enter class's name" />
+        <br>
+        <input type="text" name="studentName" placeholder="Enter student's name" />
+        <button type="submit" class="btn btn-lg btn-primary btn-block">Add Student</button>
+      </form>
+
     {{/if}}
   </header>
     <ul>
       {{#if currentUser}}
       <p> <strong>  Welcome back! Here are your classrooms: </strong></p>
         {{#each classrooms}}
-          {{> classroom}}
+          <li>{{> classroom}}</li>
         {{/each}}
+
       {{else}}
-      <p> <strong> Please sign in above! </strong></p>
+        <p> <strong> Please sign in above! </strong></p>
       {{/if}}
     </ul>
   </div>
 </body>
 
 <template name="classroom">
-  <li><b>{{name}} -- {{email}}</b></li>
+  <li><b>{{name}}</b></li>
   <p>
     <li>Location: {{location}}</li>
-    <li>No. of Students: {{noOfStudents}}</li>
+    <li>No. of Students: {{students.length}} out of {{noOfStudents}}</li>
+    <li>Students:
+      {{#each students}}
+        {{studentName}},
+      {{/each}}
+  </li>
   </p>
   <br>
 </template>
